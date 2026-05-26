@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Talent Accelerator Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --navy:#1B3A5C;
+    --teal:#1E6B72;
+    --gold:#B8962E;
+    --charcoal:#1C1C2E;
+    --gray:#5A6A7A;
+    --white:#F4F6F8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--white);
+    color:var(--charcoal);
+    overflow-x:hidden;
+    font-family:'DM Sans', sans-serif;
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+nav{
+    width:100%;
+    padding:1.2rem 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:999;
+    background:rgba(244,246,248,0.95);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(90,106,122,0.12);
+}
+
+.logo{
+    font-family:'Syne', sans-serif;
+    font-size:1.7rem;
+    font-weight:800;
+    color:var(--navy);
+    letter-spacing:1px;
+    flex-shrink:0;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+nav ul{
+    display:flex;
+    gap:2rem;
+    list-style:none;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:var(--charcoal);
+    font-weight:600;
+    font-size:0.95rem;
+    transition:0.3s;
+    position:relative;
+}
+
+nav ul li a:hover{
+    color:var(--teal);
+}
+
+nav ul li a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:var(--gold);
+    transition:0.3s;
+}
+
+nav ul li a:hover::after{
+    width:100%;
+}
+
+/* Hamburger */
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    border:none;
+    background:none;
+    z-index:1001;
+}
+
+.hamburger span{
+    display:block;
+    width:26px;
+    height:2px;
+    background:var(--navy);
+    border-radius:2px;
+    transition:0.35s ease;
+    transform-origin:center;
+}
+
+.hamburger.open span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2){
+    opacity:0;
+    transform:scaleX(0);
+}
+.hamburger.open span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile nav overlay */
+.mobile-menu{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(244,246,248,0.98);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    z-index:998;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2.5rem;
+}
+
+.mobile-menu.open{
+    display:flex;
+}
+
+.mobile-menu a{
+    font-family:'Syne', sans-serif;
+    font-size:2rem;
+    font-weight:700;
+    color:var(--navy);
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.mobile-menu a:hover{
+    color:var(--gold);
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:8rem 6% 5rem;
+    background:linear-gradient(
+        rgba(27,58,92,0.92),
+        rgba(28,28,46,0.94)
+    );
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:var(--gold);
+    opacity:0.08;
+    border-radius:50%;
+    top:-200px;
+    right:-100px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:var(--teal);
+    opacity:0.08;
+    border-radius:50%;
+    bottom:-150px;
+    left:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+    text-align:center;
+    width:100%;
+}
+
+.hero h1{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(2.4rem, 6vw, 4.5rem);
+    color:var(--white);
+    line-height:1.1;
+    margin-bottom:1.5rem;
+}
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+.hero p{
+    color:#d8dde3;
+    font-size:clamp(1rem, 2vw, 1.2rem);
+    line-height:1.8;
+    margin-bottom:2rem;
+    max-width:680px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:1rem;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
+
+.btn{
+    padding:0.9rem 2rem;
+    border:none;
+    border-radius:60px;
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:0.35s;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.btn-primary{
+    background:var(--gold);
+    color:var(--charcoal);
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 28px rgba(184,150,46,0.3);
+}
+
+.btn-secondary{
+    background:transparent;
+    color:var(--white);
+    border:2px solid rgba(255,255,255,0.22);
+}
+
+.btn-secondary:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+/* ========================= */
+/* SECTIONS */
+/* ========================= */
+
+section{
+    padding:clamp(4rem, 8vw, 6rem) 6%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:3.5rem;
+}
+
+.section-title h2{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(2rem, 5vw, 3rem);
+    color:var(--navy);
+    margin-bottom:1rem;
+}
+
+.section-title p{
+    color:var(--gray);
+    max-width:680px;
+    margin:auto;
+    line-height:1.75;
+    font-size:clamp(0.95rem, 2vw, 1.05rem);
+}
+
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.75rem;
+}
+
+.card{
+    background:white;
+    padding:2rem;
+    border-radius:22px;
+    transition:transform 0.35s, box-shadow 0.35s;
+    border:1px solid rgba(90,106,122,0.08);
+    box-shadow:0 8px 24px rgba(0,0,0,0.04);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 38px rgba(0,0,0,0.09);
+}
+
+.card-icon{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    background:var(--navy);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.8rem;
+    margin-bottom:1.4rem;
+}
+
+.card h3{
+    margin-bottom:0.8rem;
+    color:var(--charcoal);
+    font-family:'Syne', sans-serif;
+    font-size:1.25rem;
+}
+
+.card p{
+    color:var(--gray);
+    line-height:1.8;
+    font-size:0.95rem;
+}
+
+/* ========================= */
+/* ABOUT */
+/* ========================= */
+
+.about{
+    background:linear-gradient(to right, #ffffff, #f0f4f7);
+}
+
+.about-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4rem;
+    align-items:center;
+}
+
+.about-text h3{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(1.6rem, 3vw, 2rem);
+    color:var(--navy);
+    margin-bottom:1rem;
+}
+
+.about-text p{
+    color:var(--gray);
+    line-height:1.9;
+    margin-bottom:1.4rem;
+    font-size:0.97rem;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.25rem;
+}
+
+.stat{
+    background:white;
+    padding:1.75rem;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.05);
+}
+
+.stat h2{
+    font-family:'Syne', sans-serif;
+    color:var(--gold);
+    font-size:2.3rem;
+}
+
+.stat p{
+    color:var(--gray);
+    margin-top:0.4rem;
+    font-size:0.9rem;
+}
+
+/* ========================= */
+/* PARTNERS */
+/* ========================= */
+
+.partners{
+    background:var(--charcoal);
+}
+
+.partners .section-title h2{
+    color:white;
+}
+
+.partners .section-title p{
+    color:#c8d0d7;
+}
+
+.partner-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1.4rem;
+}
+
+.partner{
+    background:rgba(255,255,255,0.04);
+    padding:1.75rem;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.06);
+    color:white;
+    transition:0.35s;
+}
+
+.partner:hover{
+    background:rgba(255,255,255,0.08);
+    transform:translateY(-5px);
+}
+
+.partner h3{
+    font-family:'Syne', sans-serif;
+    color:var(--gold);
+    margin-bottom:0.8rem;
+    font-size:1.05rem;
+}
+
+.partner p{
+    font-size:0.9rem;
+    color:#c0c8d0;
+    line-height:1.7;
+}
+
+/* ========================= */
+/* BLOG */
+/* ========================= */
+
+.blog-tag{
+    display:inline-block;
+    padding:0.4rem 1rem;
+    background:rgba(30,107,114,0.1);
+    color:var(--teal);
+    border-radius:50px;
+    font-size:0.82rem;
+    margin-bottom:0.9rem;
+    font-weight:700;
+}
+
+/* ========================= */
+/* CTA / JOIN */
+/* ========================= */
+
+.cta{
+    background:linear-gradient(135deg, var(--navy), var(--teal));
+    color:white;
+    border-radius:28px;
+    padding:clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3.5rem);
+    text-align:center;
+}
+
+.cta h2{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(2rem, 5vw, 3rem);
+    margin-bottom:1rem;
+}
+
+.cta > p{
+    max-width:680px;
+    margin:0 auto 2rem;
+    line-height:1.8;
+    color:rgba(255,255,255,0.85);
+    font-size:clamp(0.95rem, 2vw, 1.05rem);
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+form{
+    max-width:760px;
+    margin:2.5rem auto 0;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.25rem;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:0.9rem 1rem;
+    border-radius:14px;
+    border:none;
+    background:white;
+    outline:none;
+    font-family:'DM Sans', sans-serif;
+    font-size:0.97rem;
+    color:var(--charcoal);
+}
+
+textarea{
+    min-height:140px;
+    resize:none;
+}
+
+.full{
+    grid-column:1 / -1;
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+footer{
+    background:var(--charcoal);
+    color:white;
+    padding:4rem 6%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:2.5rem;
+}
+
+.footer-logo{
+    font-family:'Syne', sans-serif;
+    font-size:1.6rem;
+    font-weight:800;
+    color:white;
+    letter-spacing:1px;
+    margin-bottom:1rem;
+    display:block;
+}
+
+.footer-logo span{
+    color:var(--gold);
+}
+
+.footer-desc{
+    color:#c7d0d8;
+    line-height:1.8;
+    font-size:0.92rem;
+}
+
+footer h3{
+    font-family:'Syne', sans-serif;
+    margin-bottom:1.1rem;
+    font-size:1rem;
+}
+
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+}
+
+.footer-links a{
+    color:#c7d0d8;
+    text-decoration:none;
+    font-size:0.92rem;
+    transition:0.3s;
+}
+
+.footer-links a:hover{
+    color:var(--gold);
+}
+
+.bottom{
+    margin-top:3rem;
+    padding-top:1.75rem;
+    border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;
+    color:#c4ccd3;
+    font-size:0.88rem;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+/* Tablet */
+@media(max-width:900px){
+
+    .about-content{
+        grid-template-columns:1fr;
+        gap:2.5rem;
+    }
+
+    .stats{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+}
+
+/* Mobile large */
+@media(max-width:700px){
+
+    nav ul{
+        display:none;
+    }
+
+    .hamburger{
+        display:flex;
+    }
+
+    .hero{
+        padding:7rem 6% 4rem;
+        min-height:100svh;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .hero-buttons .btn{
+        width:100%;
+        max-width:320px;
+        text-align:center;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .partner-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:1;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+/* Mobile small */
+@media(max-width:420px){
+
+    .partner-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+
+    <div class="logo">TAL<span>.</span></div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="initiatives.html">Initiatives</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="initiatives.html" class="mobile-link">Initiatives</a>
+    <a href="projects.html" class="mobile-link">Projects</a>
+    <a href="partners.html" class="mobile-link">Partners</a>
+    <a href="blog.html" class="mobile-link">Blog</a>
+    <a href="about.html" class="mobile-link">About</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Building Africa's
+            <span>Future Talent</span>
+            Ecosystem
+        </h1>
+
+        <p>
+            Talent Accelerator Lab empowers students, innovators,
+            startups, and institutions through mentorship,
+            talent acquisition, STEM ecosystems, and transformative
+            digital innovation programs.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-primary">Join TAL</a>
+            <a href="#" class="btn btn-secondary">Explore Programs</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- WHO WE ARE -->
+<section class="about">
+
+    <div class="section-title">
+        <h2>Who We Are</h2>
+        <p>
+            TAL is a collaborative innovation ecosystem focused on
+            accelerating digital talent, entrepreneurship, STEM
+            transformation, and real-world innovation opportunities.
+        </p>
+    </div>
+
+    <div class="about-content">
+
+        <div class="about-text">
+
+            <h3>Accelerating Innovation Through Collaboration</h3>
+
+            <p>
+                We connect universities, startups, industry leaders,
+                innovators, and communities to build sustainable
+                technology ecosystems that create opportunities
+                for young African talent.
+            </p>
+
+            <p>
+                Through mentorship, partnerships, talent acquisition,
+                innovation programs, and ecosystem building,
+                TAL empowers the next generation of creators,
+                leaders, and problem solvers.
+            </p>
+
+            <a href="#" class="btn btn-primary">Learn More</a>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <h2>50+</h2>
+                <p>Innovation Programs</p>
+            </div>
+
+            <div class="stat">
+                <h2>1000+</h2>
+                <p>Students Empowered</p>
+            </div>
+
+            <div class="stat">
+                <h2>30+</h2>
+                <p>Industry Mentors</p>
+            </div>
+
+            <div class="stat">
+                <h2>15+</h2>
+                <p>Strategic Partners</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INITIATIVES -->
+<section>
+
+    <div class="section-title">
+        <h2>Our Initiatives</h2>
+        <p>
+            Driving innovation, talent growth, and ecosystem
+            transformation through strategic programs.
+        </p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>Mentorship Programs</h3>
+            <p>
+                Connecting students and innovators with experienced
+                mentors to accelerate growth and leadership.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💼</div>
+            <h3>Talent Acquisition</h3>
+            <p>
+                Bridging skilled young professionals with opportunities
+                across startups, institutions, and industry.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧠</div>
+            <h3>Skills Development</h3>
+            <p>
+                Intensive practical training in software development,
+                digital transformation, and entrepreneurship.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌍</div>
+            <h3>STEM Ecosystems</h3>
+            <p>
+                Creating collaborative ecosystems using the collective
+                impact framework for sustainable innovation growth.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROJECTS -->
+<section>
+
+    <div class="section-title">
+        <h2>Featured Projects</h2>
+        <p>
+            Real-world innovation projects developed through
+            TAL initiatives and partnerships.
+        </p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Innovation Hub Platform</h3>
+            <p>
+                A collaborative platform connecting innovators,
+                startups, students, and mentors.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>STEM Outreach Initiative</h3>
+            <p>
+                Empowering secondary school students through
+                hands-on technology and innovation experiences.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Digital Skills Accelerator</h3>
+            <p>
+                Equipping youth with industry-ready software
+                engineering and entrepreneurship skills.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PARTNERS -->
+<section class="partners">
+
+    <div class="section-title">
+        <h2>Our Partners</h2>
+        <p>
+            Collaborating with visionary organizations to
+            build impactful innovation ecosystems.
+        </p>
+    </div>
+
+    <div class="partner-grid">
+
+        <div class="partner">
+            <h3>MUBAS Innovation Hub</h3>
+            <p>Innovation and entrepreneurship ecosystem support.</p>
+        </div>
+
+        <div class="partner">
+            <h3>We Create Tech</h3>
+            <p>Technology innovation and startup acceleration.</p>
+        </div>
+
+        <div class="partner">
+            <h3>Lync Systems</h3>
+            <p>Digital systems and software solutions collaboration.</p>
+        </div>
+
+        <div class="partner">
+            <h3>Future STEM Africa</h3>
+            <p>STEM education and youth empowerment partnerships.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BLOG -->
+<section>
+
+    <div class="section-title">
+        <h2>Latest Articles</h2>
+        <p>
+            Insights, stories, opportunities, and innovation updates
+            from the TAL ecosystem.
+        </p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="blog-tag">Innovation</div>
+            <h3>Building Sustainable STEM Ecosystems in Africa</h3>
+            <p>
+                Exploring how collaborative innovation models
+                can accelerate long-term digital transformation.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="blog-tag">Talent</div>
+            <h3>Preparing Students for the Future Workforce</h3>
+            <p>
+                How mentorship, practical skills, and collaboration
+                shape future-ready graduates.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="blog-tag">Partnerships</div>
+            <h3>Why Industry Collaboration Matters</h3>
+            <p>
+                Strengthening innovation ecosystems through strategic
+                partnerships and collective impact.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- JOIN US -->
+<section>
+
+    <div class="cta">
+
+        <h2>Join the TAL Ecosystem</h2>
+
+        <p>
+            Become a mentor, partner, innovator, or student
+            contributor and help shape the future of African
+            innovation and talent development.
+        </p>
+
+        <form>
+
+            <div class="form-grid">
+
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email Address">
+
+                <select>
+                    <option>Choose Role</option>
+                    <option>Student</option>
+                    <option>Mentor</option>
+                    <option>Partner</option>
+                    <option>Organization</option>
+                </select>
+
+                <input type="text" placeholder="Institution / Company">
+
+                <textarea class="full" placeholder="Tell us about yourself..."></textarea>
+
+                <button class="btn btn-primary full">Submit Application</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <span class="footer-logo">TAL<span>.</span></span>
+            <p class="footer-desc">
+                Empowering innovation, talent, and ecosystem
+                transformation through collaboration and technology.
+            </p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="projects.html">Projects</a>
+                <a href="blog.html">Blog</a>
+            </div>
+        </div>
+
+        <div>
+            <h3>Programs</h3>
+            <div class="footer-links">
+                <a href="#">Mentorship</a>
+                <a href="#">Skills Development</a>
+                <a href="#">Talent Acquisition</a>
+                <a href="#">STEM Ecosystems</a>
+            </div>
+        </div>
+
+        <div>
+            <h3>Contact</h3>
+            <div class="footer-links">
+                <a href="mailto:info@tal.org">info@tal.org</a>
+                <a href="tel:+265000000000">+265 000 000 000</a>
+                <a href="#">Blantyre, Malawi</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        © 2026 Talent Accelerator Lab. All Rights Reserved.
+    </div>
+
+</footer>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+</script>
+
+</body>
+</html>

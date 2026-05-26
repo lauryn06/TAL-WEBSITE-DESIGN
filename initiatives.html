@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAL Initiatives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --navy:#1B3A5C;
+    --teal:#1E6B72;
+    --gold:#B8962E;
+    --charcoal:#1C1C2E;
+    --gray:#5A6A7A;
+    --white:#F4F6F8;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+body{
+    background:var(--white);
+    color:var(--charcoal);
+    overflow-x:hidden;
+    font-family:'DM Sans', sans-serif;
+}
+
+/* NAV */
+nav{
+    width:100%;
+    padding:1.2rem 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0; z-index:999;
+    background:rgba(244,246,248,0.95);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(90,106,122,0.12);
+}
+.logo{
+    font-family:'Syne', sans-serif;
+    font-size:1.7rem;
+    font-weight:800;
+    color:var(--navy);
+    letter-spacing:1px;
+    flex-shrink:0;
+    text-decoration:none;
+}
+.logo span{ color:var(--gold); }
+nav ul{ display:flex; gap:2rem; list-style:none; }
+nav ul li a{
+    text-decoration:none;
+    color:var(--charcoal);
+    font-weight:600;
+    font-size:0.95rem;
+    transition:0.3s;
+    position:relative;
+}
+nav ul li a:hover{ color:var(--teal); }
+nav ul li a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:-5px;
+    width:0%; height:2px;
+    background:var(--gold);
+    transition:0.3s;
+}
+nav ul li a:hover::after{ width:100%; }
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    border:none;
+    background:none;
+    z-index:1001;
+}
+.hamburger span{
+    display:block;
+    width:26px; height:2px;
+    background:var(--navy);
+    border-radius:2px;
+    transition:0.35s ease;
+    transform-origin:center;
+}
+.hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
+.hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(244,246,248,0.98);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    z-index:998;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2.5rem;
+}
+.mobile-menu.open{ display:flex; }
+.mobile-menu a{
+    font-family:'Syne', sans-serif;
+    font-size:2rem;
+    font-weight:700;
+    color:var(--navy);
+    text-decoration:none;
+    transition:0.3s;
+}
+.mobile-menu a:hover{ color:var(--gold); }
+
+/* ============================== */
+/* HERO */
+/* ============================== */
+
+.hero{
+    min-height:78vh;
+    display:flex;
+    align-items:center;
+    padding:clamp(7rem,15vw,9rem) 6% clamp(4rem,8vw,5rem);
+    background:linear-gradient(135deg, rgba(27,58,92,0.96), rgba(30,107,114,0.94));
+    position:relative;
+    overflow:hidden;
+}
+.hero::before{
+    content:"";
+    position:absolute;
+    width:700px; height:700px;
+    border-radius:50%;
+    background:var(--gold);
+    opacity:0.07;
+    top:-300px; right:-180px;
+}
+.hero::after{
+    content:"";
+    position:absolute;
+    width:400px; height:400px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.04);
+    bottom:-160px; left:-100px;
+}
+.hero-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4rem;
+    align-items:center;
+    max-width:1200px;
+    width:100%;
+    position:relative;
+    z-index:2;
+}
+.hero-text small{
+    color:var(--gold);
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:700;
+    font-size:0.82rem;
+}
+.hero-text h1{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(2.6rem, 6vw, 4.5rem);
+    color:white;
+    line-height:1.05;
+    margin:1.2rem 0 1.5rem;
+}
+.hero-text p{
+    color:rgba(255,255,255,0.82);
+    font-size:clamp(1rem, 2vw, 1.12rem);
+    line-height:1.9;
+    margin-bottom:2rem;
+}
+.hero-btns{ display:flex; gap:1rem; flex-wrap:wrap; }
+.btn-gold{
+    display:inline-block;
+    padding:0.9rem 2rem;
+    background:var(--gold);
+    color:var(--charcoal);
+    border-radius:60px;
+    text-decoration:none;
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    transition:0.35s;
+    border:none;
+    cursor:pointer;
+    font-size:0.95rem;
+}
+.btn-gold:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 28px rgba(184,150,46,0.35);
+}
+.btn-outline{
+    display:inline-block;
+    padding:0.9rem 2rem;
+    background:transparent;
+    color:white;
+    border-radius:60px;
+    text-decoration:none;
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    transition:0.35s;
+    border:2px solid rgba(255,255,255,0.25);
+    font-size:0.95rem;
+}
+.btn-outline:hover{ background:rgba(255,255,255,0.09); }
+
+/* Hero quick-stat panel */
+.hero-panel{
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:28px;
+    padding:2.5rem;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem;
+    backdrop-filter:blur(10px);
+}
+.hero-stat{ text-align:center; }
+.hero-stat h2{
+    font-family:'Syne', sans-serif;
+    font-size:2.4rem;
+    color:var(--gold);
+}
+.hero-stat p{ color:rgba(255,255,255,0.75); font-size:0.9rem; margin-top:0.3rem; }
+
+/* ============================== */
+/* SECTIONS */
+/* ============================== */
+
+section{ padding:clamp(4rem,8vw,6rem) 6%; }
+.section-title{ text-align:center; margin-bottom:3.5rem; }
+.section-title h2{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(2rem, 5vw, 3rem);
+    color:var(--navy);
+    margin-bottom:1rem;
+}
+.section-title p{
+    max-width:680px;
+    margin:auto;
+    line-height:1.75;
+    color:var(--gray);
+    font-size:clamp(0.95rem, 2vw, 1.05rem);
+}
+
+/* ============================== */
+/* INITIATIVE DEEP-DIVES */
+/* ============================== */
+
+.initiative{
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:3.5rem;
+    align-items:center;
+    margin-bottom:5rem;
+    background:white;
+    border-radius:30px;
+    padding:clamp(2rem, 5vw, 3.5rem);
+    border:1px solid rgba(90,106,122,0.07);
+    box-shadow:0 12px 36px rgba(0,0,0,0.04);
+}
+.initiative:last-child{ margin-bottom:0; }
+.initiative.reverse{ grid-template-columns:1.4fr 1fr; }
+.initiative.reverse .init-visual{ order:2; }
+.initiative.reverse .init-body{ order:1; }
+
+.init-visual{
+    height:clamp(260px, 30vw, 380px);
+    border-radius:22px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.init-visual.c1{ background:linear-gradient(135deg, #1B3A5C, #1E6B72); }
+.init-visual.c2{ background:linear-gradient(135deg, #1E6B72, #2a9297); }
+.init-visual.c3{ background:linear-gradient(135deg, #1C1C2E, #1B3A5C); }
+.init-visual.c4{ background:linear-gradient(135deg, #B8962E, #1B3A5C); }
+.init-visual::before{
+    content:"";
+    position:absolute;
+    width:200px; height:200px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    top:-50px; right:-40px;
+}
+.init-visual::after{
+    content:"";
+    position:absolute;
+    width:140px; height:140px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.05);
+    bottom:-40px; left:-30px;
+}
+.init-icon{
+    font-size:4rem;
+    position:relative;
+    z-index:2;
+}
+
+.init-label{
+    display:inline-block;
+    padding:0.45rem 1rem;
+    border-radius:50px;
+    background:rgba(30,107,114,0.1);
+    color:var(--teal);
+    font-size:0.82rem;
+    font-weight:700;
+    margin-bottom:1rem;
+}
+.init-body h3{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(1.6rem, 3vw, 2.2rem);
+    color:var(--charcoal);
+    margin-bottom:1.1rem;
+    line-height:1.2;
+}
+.init-body p{
+    color:var(--gray);
+    line-height:1.9;
+    margin-bottom:1.2rem;
+    font-size:0.97rem;
+}
+.init-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.7rem;
+    margin-bottom:1.5rem;
+}
+.init-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:0.75rem;
+    color:var(--gray);
+    font-size:0.93rem;
+    line-height:1.7;
+}
+.init-list li::before{
+    content:"✓";
+    color:var(--teal);
+    font-weight:700;
+    flex-shrink:0;
+    margin-top:2px;
+}
+
+/* ============================== */
+/* HOW IT WORKS */
+/* ============================== */
+
+.how-wrap{
+    background:var(--charcoal);
+    border-radius:36px;
+    padding:clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+}
+.how-wrap .section-title h2{ color:white; }
+.how-wrap .section-title p{ color:#d0d7dd; }
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:1.5rem;
+    counter-reset:steps;
+}
+.step{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:24px;
+    padding:2rem;
+    position:relative;
+    transition:0.35s;
+    counter-increment:steps;
+}
+.step:hover{
+    background:rgba(255,255,255,0.09);
+    transform:translateY(-5px);
+}
+.step-number{
+    font-family:'Syne', sans-serif;
+    font-size:3rem;
+    color:rgba(184,150,46,0.25);
+    font-weight:800;
+    line-height:1;
+    margin-bottom:1rem;
+}
+.step h3{
+    font-family:'Syne', sans-serif;
+    color:white;
+    margin-bottom:0.8rem;
+    font-size:1.15rem;
+}
+.step p{ color:#d0d7dd; line-height:1.8; font-size:0.9rem; }
+
+/* ============================== */
+/* WHO CAN JOIN */
+/* ============================== */
+
+.who-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:1.75rem;
+}
+.who-card{
+    background:white;
+    border-radius:24px;
+    padding:2.2rem;
+    border:1px solid rgba(90,106,122,0.08);
+    box-shadow:0 8px 24px rgba(0,0,0,0.04);
+    transition:0.35s;
+    text-align:center;
+}
+.who-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.08);
+}
+.who-icon{
+    width:72px; height:72px;
+    border-radius:20px;
+    background:linear-gradient(135deg, var(--navy), var(--teal));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2rem;
+    margin:0 auto 1.4rem;
+}
+.who-card h3{
+    font-family:'Syne', sans-serif;
+    font-size:1.2rem;
+    color:var(--charcoal);
+    margin-bottom:0.8rem;
+}
+.who-card p{ color:var(--gray); line-height:1.8; font-size:0.92rem; }
+
+/* ============================== */
+/* APPLY SECTION */
+/* ============================== */
+
+.apply-wrap{
+    background:linear-gradient(135deg, var(--navy), var(--teal));
+    border-radius:36px;
+    padding:clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+    color:white;
+}
+.apply-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4rem;
+    align-items:start;
+}
+.apply-text h2{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(2rem, 5vw, 3rem);
+    margin-bottom:1.2rem;
+    line-height:1.1;
+}
+.apply-text p{
+    color:rgba(255,255,255,0.83);
+    line-height:1.9;
+    margin-bottom:2rem;
+    font-size:clamp(0.95rem, 2vw, 1.05rem);
+}
+.apply-perks{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.8rem;
+}
+.apply-perks li{
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+    color:rgba(255,255,255,0.85);
+    font-size:0.95rem;
+}
+.apply-perks li::before{
+    content:"→";
+    color:var(--gold);
+    font-weight:700;
+    flex-shrink:0;
+}
+
+/* Apply form */
+.apply-form{
+    background:white;
+    border-radius:24px;
+    padding:2.5rem;
+}
+.apply-form h3{
+    font-family:'Syne', sans-serif;
+    color:var(--navy);
+    font-size:1.4rem;
+    margin-bottom:1.75rem;
+}
+.form-field{
+    margin-bottom:1.2rem;
+}
+.form-field label{
+    display:block;
+    font-size:0.88rem;
+    font-weight:600;
+    color:var(--charcoal);
+    margin-bottom:0.5rem;
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+    width:100%;
+    padding:0.85rem 1rem;
+    border-radius:12px;
+    border:1.5px solid rgba(90,106,122,0.15);
+    background:var(--white);
+    outline:none;
+    font-family:'DM Sans', sans-serif;
+    font-size:0.95rem;
+    color:var(--charcoal);
+    transition:0.3s;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+    border-color:var(--teal);
+    background:white;
+}
+.form-field textarea{ min-height:110px; resize:none; }
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+}
+
+/* FOOTER */
+footer{ background:var(--charcoal); color:white; padding:4rem 6%; }
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:2.5rem;
+}
+.footer-logo{
+    font-family:'Syne', sans-serif;
+    font-size:1.6rem;
+    font-weight:800;
+    color:white;
+    display:block;
+    margin-bottom:1rem;
+}
+.footer-logo span{ color:var(--gold); }
+.footer-desc{ color:#c7d0d8; line-height:1.8; font-size:0.92rem; }
+footer h3{ font-family:'Syne', sans-serif; margin-bottom:1rem; font-size:1rem; }
+.footer-links{ display:flex; flex-direction:column; gap:0.75rem; }
+.footer-links a{ color:#c7d0d8; text-decoration:none; font-size:0.92rem; transition:0.3s; }
+.footer-links a:hover{ color:var(--gold); }
+.bottom{
+    margin-top:3rem;
+    padding-top:1.75rem;
+    border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;
+    color:#c4ccd3;
+    font-size:0.88rem;
+}
+
+/* ============================== */
+/* RESPONSIVE */
+/* ============================== */
+
+@media(max-width:1000px){
+    .hero-inner{ grid-template-columns:1fr; gap:3rem; }
+    .hero-panel{ grid-template-columns:repeat(4,1fr); gap:1rem; }
+    .apply-grid{ grid-template-columns:1fr; gap:2.5rem; }
+}
+
+@media(max-width:800px){
+    .initiative{ grid-template-columns:1fr; }
+    .initiative.reverse .init-visual{ order:0; }
+    .initiative.reverse .init-body{ order:0; }
+    .init-visual{ height:220px; }
+    .hero-panel{ grid-template-columns:1fr 1fr; }
+}
+
+@media(max-width:700px){
+    nav ul{ display:none; }
+    .hamburger{ display:flex; }
+    .form-row{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr 1fr; }
+    .who-grid{ grid-template-columns:1fr 1fr; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .hero-btns{ flex-direction:column; }
+    .hero-btns a{ text-align:center; }
+}
+
+@media(max-width:480px){
+    .hero-panel{ grid-template-columns:1fr 1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .who-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <a href="index.html" class="logo">TAL<span>.</span></a>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="initiatives.html">Initiatives</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mobile-link">Home</a>
+    <a href="initiatives.html" class="mobile-link">Initiatives</a>
+    <a href="projects.html" class="mobile-link">Projects</a>
+    <a href="partners.html" class="mobile-link">Partners</a>
+    <a href="blog.html" class="mobile-link">Blog</a>
+    <a href="about.html" class="mobile-link">About</a>
+</div>
+
+<!-- HERO — split layout with stat panel -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-text">
+            <small>TAL Programs & Initiatives</small>
+            <h1>Programs That Change Trajectories</h1>
+            <p>Each TAL initiative is designed to remove barriers, open doors, and equip African innovators with the skills, networks, and opportunities they need to lead.</p>
+            <div class="hero-btns">
+                <a href="#apply" class="btn-gold">Apply Now</a>
+                <a href="#initiatives" class="btn-outline">Explore Programs</a>
+            </div>
+        </div>
+        <div class="hero-panel">
+            <div class="hero-stat"><h2>50+</h2><p>Active Programs</p></div>
+            <div class="hero-stat"><h2>1K+</h2><p>Participants</p></div>
+            <div class="hero-stat"><h2>30+</h2><p>Expert Mentors</p></div>
+            <div class="hero-stat"><h2>15+</h2><p>Partners</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- INITIATIVE DEEP-DIVES -->
+<section id="initiatives">
+    <div class="section-title">
+        <h2>Our Core Initiatives</h2>
+        <p>Four flagship programs addressing the full talent development journey — from inspiration to employment.</p>
+    </div>
+
+    <!-- 1. MENTORSHIP -->
+    <div class="initiative">
+        <div class="init-visual c1"><div class="init-icon">🎯</div></div>
+        <div class="init-body">
+            <span class="init-label">Program 01</span>
+            <h3>Mentorship Programs</h3>
+            <p>Our structured mentorship initiative pairs emerging innovators and students with seasoned professionals across technology, entrepreneurship, and leadership domains.</p>
+            <p>Mentees gain personalised guidance, accountability, and real-world perspectives that accelerate career and innovation readiness.</p>
+            <ul class="init-list">
+                <li>1-on-1 and group mentoring sessions</li>
+                <li>Monthly innovation challenges with mentor oversight</li>
+                <li>Cross-sector exposure — tech, business, policy, social impact</li>
+                <li>Structured 6-month cohort cycles</li>
+                <li>Access to TAL's professional network on completion</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2. TALENT ACQUISITION -->
+    <div class="initiative reverse">
+        <div class="init-visual c2"><div class="init-icon">💼</div></div>
+        <div class="init-body">
+            <span class="init-label">Program 02</span>
+            <h3>Talent Acquisition</h3>
+            <p>TAL bridges the gap between skilled youth and the organisations that need them — connecting graduates, innovators, and creatives with jobs, internships, and freelance opportunities.</p>
+            <p>We work with startups, institutions, and industry to build pipelines that value potential over pedigree.</p>
+            <ul class="init-list">
+                <li>Curated talent marketplace for TAL-certified graduates</li>
+                <li>CV and portfolio review workshops</li>
+                <li>Company placement and internship partnerships</li>
+                <li>Soft skills and interview readiness training</li>
+                <li>Ongoing alumni job board and referrals</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3. SKILLS DEVELOPMENT -->
+    <div class="initiative">
+        <div class="init-visual c3"><div class="init-icon">🧠</div></div>
+        <div class="init-body">
+            <span class="init-label">Program 03</span>
+            <h3>Skills Development</h3>
+            <p>Intensive, practical bootcamps and workshops that equip participants with in-demand skills — software engineering, UI/UX, data, digital marketing, and entrepreneurship.</p>
+            <p>Built around project-based learning, every cohort ships something real by the end.</p>
+            <ul class="init-list">
+                <li>4–12 week focused bootcamps</li>
+                <li>Live project builds with industry briefs</li>
+                <li>Peer learning pods and weekly check-ins</li>
+                <li>Digital and in-person delivery options</li>
+                <li>TAL certificate of completion and portfolio</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 4. STEM ECOSYSTEMS -->
+    <div class="initiative reverse">
+        <div class="init-visual c4"><div class="init-icon">🌍</div></div>
+        <div class="init-body">
+            <span class="init-label">Program 04</span>
+            <h3>STEM Ecosystems</h3>
+            <p>Using the Collective Impact Framework, TAL convenes universities, secondary schools, government bodies, and tech organisations around shared goals for STEM transformation.</p>
+            <p>We don't just run programs — we build the infrastructure for sustainable innovation culture.</p>
+            <ul class="init-list">
+                <li>STEM clubs and labs in secondary schools</li>
+                <li>University-industry innovation bridges</li>
+                <li>Annual STEM Innovation Summit</li>
+                <li>Ecosystem mapping and gap analysis</li>
+                <li>Policy advocacy and coalition building</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+    <div class="how-wrap">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>A simple, clear path from discovery to opportunity.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Discover</h3>
+                <p>Explore TAL initiatives and find the program that matches your goals, experience level, and interests.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Apply</h3>
+                <p>Submit a short application. No entry barriers — we assess passion and potential, not just credentials.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Participate</h3>
+                <p>Join your cohort, engage with mentors, complete projects, and build your network within the ecosystem.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3>Graduate</h3>
+                <p>Receive your certificate, join the TAL alumni community, and access ongoing opportunities and referrals.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO CAN JOIN -->
+<section>
+    <div class="section-title">
+        <h2>Who Can Join</h2>
+        <p>TAL initiatives are open to a broad ecosystem of participants — whether you're just starting out or looking to give back.</p>
+    </div>
+    <div class="who-grid">
+        <div class="who-card">
+            <div class="who-icon">🎓</div>
+            <h3>Students</h3>
+            <p>University and secondary school students looking to develop skills, gain mentorship, and build a professional foundation.</p>
+        </div>
+        <div class="who-card">
+            <div class="who-icon">🚀</div>
+            <h3>Innovators</h3>
+            <p>Early-stage entrepreneurs, creators, and problem-solvers building solutions to real-world challenges.</p>
+        </div>
+        <div class="who-card">
+            <div class="who-icon">🤝</div>
+            <h3>Mentors</h3>
+            <p>Professionals and industry leaders who want to invest time in developing Africa's next generation of talent.</p>
+        </div>
+        <div class="who-card">
+            <div class="who-icon">🏢</div>
+            <h3>Organizations</h3>
+            <p>Companies, institutions, and NGOs looking to engage with emerging talent pipelines and innovation ecosystems.</p>
+        </div>
+    </div>
+</section>
+
+<!-- APPLY -->
+<section id="apply">
+    <div class="apply-wrap">
+        <div class="apply-grid">
+            <div class="apply-text">
+                <h2>Ready to Join a Program?</h2>
+                <p>Applications are open on a rolling basis. Fill in the form and our team will reach out within 3–5 business days with next steps.</p>
+                <ul class="apply-perks">
+                    <li>No application fee — ever</li>
+                    <li>Open to all nationalities and backgrounds</li>
+                    <li>Flexible participation — remote & in-person</li>
+                    <li>Cohorts starting every quarter</li>
+                    <li>Alumni network access for life</li>
+                </ul>
+            </div>
+            <div class="apply-form">
+                <h3>Application Form</h3>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>First Name</label>
+                        <input type="text" placeholder="Chisomo">
+                    </div>
+                    <div class="form-field">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Banda">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="you@example.com">
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Program</label>
+                        <select>
+                            <option>Select Program</option>
+                            <option>Mentorship</option>
+                            <option>Talent Acquisition</option>
+                            <option>Skills Development</option>
+                            <option>STEM Ecosystems</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Role</label>
+                        <select>
+                            <option>I am a...</option>
+                            <option>Student</option>
+                            <option>Innovator</option>
+                            <option>Mentor</option>
+                            <option>Organization</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label>Why do you want to join TAL?</label>
+                    <textarea placeholder="Tell us a bit about yourself and your goals..."></textarea>
+                </div>
+                <button class="btn-gold" style="width:100%; justify-content:center;">Submit Application</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <span class="footer-logo">TAL<span>.</span></span>
+            <p class="footer-desc">Empowering innovation, talent, and ecosystem transformation across Africa.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="partners.html">Partners</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+        <div>
+            <h3>Initiatives</h3>
+            <div class="footer-links">
+                <a href="#">Mentorship</a>
+                <a href="#">Talent Acquisition</a>
+                <a href="#">Skills Development</a>
+                <a href="#">STEM Ecosystems</a>
+            </div>
+        </div>
+        <div>
+            <h3>Contact</h3>
+            <div class="footer-links">
+                <a href="mailto:info@tal.org">info@tal.org</a>
+                <a href="#">Blantyre, Malawi</a>
+                <a href="tel:+265000000000">+265 000 000 000</a>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">© 2026 Talent Accelerator Lab. All Rights Reserved.</div>
+</footer>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+</script>
+
+</body>
+</html>

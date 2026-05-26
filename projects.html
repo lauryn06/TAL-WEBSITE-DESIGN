@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TAL Projects</title>
+
+<style>
+
+:root{
+    --navy:#1B3A5C;
+    --teal:#1E6B72;
+    --gold:#B8962E;
+    --charcoal:#1C1C2E;
+    --gray:#5A6A7A;
+    --white:#F4F6F8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--white);
+    color:var(--charcoal);
+    overflow-x:hidden;
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+nav{
+    width:100%;
+    padding:1.2rem 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:1000;
+    background:rgba(244,246,248,0.94);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(90,106,122,0.08);
+}
+
+.logo{
+    font-size:1.8rem;
+    font-weight:800;
+    color:var(--navy);
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:2rem;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:var(--charcoal);
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    color:var(--teal);
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+    min-height:75vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:8rem 8% 5rem;
+    background:
+    linear-gradient(
+        rgba(27,58,92,0.92),
+        rgba(28,28,46,0.95)
+    );
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    background:var(--gold);
+    opacity:0.07;
+    top:-250px;
+    right:-120px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    background:var(--teal);
+    opacity:0.08;
+    bottom:-180px;
+    left:-80px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+.hero h1{
+    font-size:4.5rem;
+    color:white;
+    line-height:1.1;
+    margin-bottom:1.5rem;
+}
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+.hero p{
+    color:#d6dde3;
+    line-height:1.9;
+    font-size:1.15rem;
+}
+
+/* ========================= */
+/* GENERAL */
+/* ========================= */
+
+section{
+    padding:6rem 8%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:4rem;
+}
+
+.section-title h2{
+    font-size:3rem;
+    color:var(--navy);
+    margin-bottom:1rem;
+}
+
+.section-title p{
+    max-width:750px;
+    margin:auto;
+    line-height:1.8;
+    color:var(--gray);
+}
+
+/* ========================= */
+/* FEATURED PROJECT */
+/* ========================= */
+
+.featured-project{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:4rem;
+    align-items:center;
+    background:white;
+    border-radius:35px;
+    padding:4rem;
+    box-shadow:0 20px 50px rgba(0,0,0,0.05);
+}
+
+.featured-image{
+    background:
+    linear-gradient(
+        135deg,
+        var(--navy),
+        var(--teal)
+    );
+    height:450px;
+    border-radius:28px;
+    position:relative;
+    overflow:hidden;
+}
+
+.featured-image::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:rgba(255,255,255,0.08);
+    border-radius:50%;
+    top:-60px;
+    right:-40px;
+}
+
+.featured-image::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    background:rgba(255,255,255,0.06);
+    border-radius:50%;
+    bottom:-50px;
+    left:-30px;
+}
+
+.featured-content span{
+    display:inline-block;
+    background:rgba(184,150,46,0.12);
+    color:var(--gold);
+    padding:0.6rem 1rem;
+    border-radius:50px;
+    margin-bottom:1.5rem;
+    font-weight:700;
+}
+
+.featured-content h2{
+    font-size:3rem;
+    margin-bottom:1.5rem;
+    color:var(--charcoal);
+}
+
+.featured-content p{
+    line-height:1.9;
+    color:var(--gray);
+    margin-bottom:1.5rem;
+}
+
+.project-stats{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-top:2rem;
+}
+
+.project-stats div{
+    background:var(--white);
+    padding:1rem 1.5rem;
+    border-radius:18px;
+    border:1px solid rgba(90,106,122,0.08);
+}
+
+.project-stats h3{
+    color:var(--navy);
+}
+
+.project-stats p{
+    margin:0;
+    font-size:0.9rem;
+}
+
+/* ========================= */
+/* PROJECT GRID */
+/* ========================= */
+
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:2rem;
+}
+
+.project-card{
+    background:white;
+    border-radius:28px;
+    overflow:hidden;
+    transition:0.4s;
+    border:1px solid rgba(90,106,122,0.08);
+    box-shadow:0 10px 30px rgba(0,0,0,0.03);
+}
+
+.project-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.08);
+}
+
+.project-top{
+    height:220px;
+    background:
+    linear-gradient(
+        135deg,
+        var(--navy),
+        var(--teal)
+    );
+    position:relative;
+}
+
+.project-top::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.07);
+    top:30px;
+    right:20px;
+}
+
+.project-top::after{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.06);
+    bottom:20px;
+    left:20px;
+}
+
+.project-body{
+    padding:2rem;
+}
+
+.category{
+    display:inline-block;
+    background:rgba(30,107,114,0.1);
+    color:var(--teal);
+    padding:0.5rem 1rem;
+    border-radius:50px;
+    font-size:0.85rem;
+    font-weight:700;
+    margin-bottom:1rem;
+}
+
+.project-body h3{
+    font-size:1.6rem;
+    margin-bottom:1rem;
+    color:var(--charcoal);
+}
+
+.project-body p{
+    line-height:1.8;
+    color:var(--gray);
+    margin-bottom:1.5rem;
+}
+
+.tech{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+}
+
+.tech span{
+    background:var(--white);
+    border:1px solid rgba(90,106,122,0.08);
+    padding:0.5rem 1rem;
+    border-radius:50px;
+    font-size:0.85rem;
+    color:var(--gray);
+}
+
+/* ========================= */
+/* IMPACT */
+/* ========================= */
+
+.impact{
+    background:var(--charcoal);
+    border-radius:35px;
+    padding:5rem;
+    color:white;
+}
+
+.impact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:2rem;
+    margin-top:4rem;
+}
+
+.impact-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:2rem;
+    border-radius:24px;
+    text-align:center;
+}
+
+.impact-card h1{
+    font-size:3rem;
+    color:var(--gold);
+    margin-bottom:0.7rem;
+}
+
+.impact-card p{
+    color:#d0d7dd;
+}
+
+/* ========================= */
+/* CTA */
+/* ========================= */
+
+.cta{
+    text-align:center;
+    background:
+    linear-gradient(
+        135deg,
+        var(--navy),
+        var(--teal)
+    );
+    padding:5rem;
+    border-radius:35px;
+    color:white;
+}
+
+.cta h2{
+    font-size:3rem;
+    margin-bottom:1rem;
+}
+
+.cta p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    margin-bottom:2rem;
+    color:#d6dde3;
+}
+
+.btn{
+    display:inline-block;
+    padding:1rem 2rem;
+    border-radius:60px;
+    background:var(--gold);
+    color:var(--charcoal);
+    font-weight:700;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(184,150,46,0.3);
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+footer{
+    background:var(--charcoal);
+    color:white;
+    padding:4rem 8%;
+    margin-top:6rem;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:2rem;
+}
+
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:0.8rem;
+}
+
+.footer-links a{
+    text-decoration:none;
+    color:#d0d7dd;
+    transition:0.3s;
+}
+
+.footer-links a:hover{
+    color:var(--gold);
+}
+
+.bottom{
+    margin-top:3rem;
+    padding-top:2rem;
+    border-top:1px solid rgba(255,255,255,0.08);
+    text-align:center;
+    color:#d0d7dd;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:950px){
+
+    .featured-project{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+}
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+/* TABLETS */
+
+@media(max-width:992px){
+
+    nav{
+        padding:1rem 5%;
+    }
+
+    section{
+        padding:5rem 5%;
+    }
+
+    .hero{
+        min-height:70vh;
+        padding:7rem 5% 4rem;
+    }
+
+    .hero h1{
+        font-size:3.2rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+
+    .featured-project{
+        grid-template-columns:1fr;
+        gap:2.5rem;
+        padding:2.5rem;
+    }
+
+    .featured-image{
+        height:350px;
+    }
+
+    .featured-content h2{
+        font-size:2.4rem;
+    }
+
+    .projects-grid{
+        grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+
+    .impact{
+        padding:3rem;
+    }
+
+    .cta{
+        padding:3.5rem 2rem;
+    }
+
+    .cta h2{
+        font-size:2.5rem;
+    }
+
+    footer{
+        padding:3rem 5%;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    nav{
+        padding:1rem 1.5rem;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    section{
+        padding:4rem 1.5rem;
+    }
+
+    .hero{
+        min-height:65vh;
+        padding:7rem 1.5rem 4rem;
+    }
+
+    .hero h1{
+        font-size:2.5rem;
+        line-height:1.2;
+    }
+
+    .hero p{
+        font-size:0.98rem;
+        line-height:1.8;
+    }
+
+    .section-title{
+        margin-bottom:2.5rem;
+    }
+
+    .section-title h2{
+        font-size:2rem;
+    }
+
+    .section-title p{
+        font-size:0.95rem;
+    }
+
+    .featured-project{
+        padding:1.5rem;
+        border-radius:24px;
+    }
+
+    .featured-image{
+        height:250px;
+        border-radius:20px;
+    }
+
+    .featured-content h2{
+        font-size:2rem;
+    }
+
+    .featured-content p{
+        font-size:0.96rem;
+    }
+
+    .project-stats{
+        flex-direction:column;
+    }
+
+    .project-stats div{
+        width:100%;
+    }
+
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+
+    .project-card{
+        border-radius:22px;
+    }
+
+    .project-top{
+        height:190px;
+    }
+
+    .project-body{
+        padding:1.5rem;
+    }
+
+    .project-body h3{
+        font-size:1.4rem;
+    }
+
+    .impact{
+        padding:2rem 1.5rem;
+        border-radius:24px;
+    }
+
+    .impact-grid{
+        grid-template-columns:1fr;
+        margin-top:2rem;
+    }
+
+    .impact-card h1{
+        font-size:2.3rem;
+    }
+
+    .cta{
+        padding:3rem 1.5rem;
+        border-radius:24px;
+    }
+
+    .cta h2{
+        font-size:2rem;
+    }
+
+    .cta p{
+        font-size:0.95rem;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+
+    footer{
+        padding:3rem 1.5rem;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+        gap:2.5rem;
+    }
+
+    .bottom{
+        font-size:0.9rem;
+    }
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .featured-content h2{
+        font-size:1.7rem;
+    }
+
+    .section-title h2{
+        font-size:1.7rem;
+    }
+
+    .cta h2{
+        font-size:1.7rem;
+    }
+
+    .project-body h3{
+        font-size:1.2rem;
+    }
+
+    .logo{
+        font-size:1.5rem;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        TAL<span>.</span>
+    </div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="initiatives.html">Initiatives</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            TAL <span>Projects</span>
+        </h1>
+
+        <p>
+            Discover innovation-driven projects developed
+            through collaboration, mentorship, STEM initiatives,
+            and digital transformation programs across the TAL ecosystem.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- FEATURED PROJECT -->
+
+<section>
+
+    <div class="featured-project">
+
+        <div class="featured-image"></div>
+
+        <div class="featured-content">
+
+            <span>Featured Innovation Project</span>
+
+            <h2>
+                TAL Innovation Hub Platform
+            </h2>
+
+            <p>
+                A collaborative digital ecosystem connecting
+                students, startups, mentors, institutions,
+                and innovators through project management,
+                mentorship matching, and innovation opportunities.
+            </p>
+
+            <p>
+                The platform supports ecosystem collaboration,
+                startup incubation, skills development,
+                and innovation-driven community engagement.
+            </p>
+
+            <div class="project-stats">
+
+                <div>
+                    <h3>20+</h3>
+                    <p>Collaborators</p>
+                </div>
+
+                <div>
+                    <h3>5</h3>
+                    <p>Institutions</p>
+                </div>
+
+                <div>
+                    <h3>1000+</h3>
+                    <p>Students Impacted</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Innovation Projects</h2>
+
+        <p>
+            Practical projects solving real-world challenges
+            through technology, collaboration, and innovation.
+        </p>
+
+    </div>
+
+    <div class="projects-grid">
+
+        <div class="project-card">
+
+            <div class="project-top"></div>
+
+            <div class="project-body">
+
+                <span class="category">STEM Education</span>
+
+                <h3>STEM Outreach Program</h3>
+
+                <p>
+                    Bringing practical technology and innovation
+                    experiences to secondary schools through
+                    workshops, coding labs, and mentorship.
+                </p>
+
+                <div class="tech">
+                    <span>Education</span>
+                    <span>STEM</span>
+                    <span>Youth</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="project-card">
+
+            <div class="project-top"></div>
+
+            <div class="project-body">
+
+                <span class="category">Digital Innovation</span>
+
+                <h3>Community Innovation Portal</h3>
+
+                <p>
+                    A centralized platform for innovation events,
+                    startup collaboration, opportunities,
+                    and ecosystem networking.
+                </p>
+
+                <div class="tech">
+                    <span>Web Platform</span>
+                    <span>Innovation</span>
+                    <span>Networking</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="project-card">
+
+            <div class="project-top"></div>
+
+            <div class="project-body">
+
+                <span class="category">Talent Development</span>
+
+                <h3>Digital Skills Accelerator</h3>
+
+                <p>
+                    Intensive practical training programs focused
+                    on software engineering, entrepreneurship,
+                    and emerging technologies.
+                </p>
+
+                <div class="tech">
+                    <span>Training</span>
+                    <span>Software</span>
+                    <span>Leadership</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="project-card">
+
+            <div class="project-top"></div>
+
+            <div class="project-body">
+
+                <span class="category">Entrepreneurship</span>
+
+                <h3>Startup Incubation Network</h3>
+
+                <p>
+                    Supporting early-stage startups through
+                    mentorship, ecosystem collaboration,
+                    and innovation support structures.
+                </p>
+
+                <div class="tech">
+                    <span>Startups</span>
+                    <span>Business</span>
+                    <span>Innovation</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="project-card">
+
+            <div class="project-top"></div>
+
+            <div class="project-body">
+
+                <span class="category">Research & Impact</span>
+
+                <h3>STEM Ecosystem Mapping</h3>
+
+                <p>
+                    Identifying opportunities, innovation gaps,
+                    and collaborative pathways for sustainable
+                    ecosystem transformation.
+                </p>
+
+                <div class="tech">
+                    <span>Research</span>
+                    <span>Policy</span>
+                    <span>STEM</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="project-card">
+
+            <div class="project-top"></div>
+
+            <div class="project-body">
+
+                <span class="category">Technology</span>
+
+                <h3>Innovation Challenge Platform</h3>
+
+                <p>
+                    Managing hackathons, innovation competitions,
+                    mentorship sessions, and collaborative
+                    technology events.
+                </p>
+
+                <div class="tech">
+                    <span>Hackathons</span>
+                    <span>Events</span>
+                    <span>Community</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- IMPACT -->
+
+<section>
+
+    <div class="impact">
+
+        <div class="section-title">
+
+            <h2 style="color:white;">
+                Project Impact
+            </h2>
+
+            <p style="color:#d0d7dd;">
+                Measuring innovation and ecosystem transformation
+                through practical impact and collaboration.
+            </p>
+
+        </div>
+
+        <div class="impact-grid">
+
+            <div class="impact-card">
+                <h1>15+</h1>
+                <p>Innovation Projects</p>
+            </div>
+
+            <div class="impact-card">
+                <h1>1000+</h1>
+                <p>Youth Reached</p>
+            </div>
+
+            <div class="impact-card">
+                <h1>10+</h1>
+                <p>Communities Engaged</p>
+            </div>
+
+            <div class="impact-card">
+                <h1>30+</h1>
+                <p>Industry Collaborators</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section>
+
+    <div class="cta">
+
+        <h2>
+            Collaborate With TAL
+        </h2>
+
+        <p>
+            Partner with us to create impactful projects,
+            empower innovators, and build sustainable
+            technology ecosystems.
+        </p>
+
+        <a href="#" class="btn">
+            Start a Collaboration
+        </a>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="logo">
+                TAL<span>.</span>
+            </div>
+
+            <p style="margin-top:1rem; line-height:1.8; color:#d0d7dd;">
+                Building innovation ecosystems and empowering
+                future talent through collaboration.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3 style="margin-bottom:1rem;">
+                Quick Links
+            </h3>
+
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="partners.html">Partners</a>
+                <a href="blog.html">Blog</a>
+            </div>
+
+        </div>
+
+        <div>
+
+            <h3 style="margin-bottom:1rem;">
+                Programs
+            </h3>
+
+            <div class="footer-links">
+                <a href="#">Mentorship</a>
+                <a href="#">Skills Development</a>
+                <a href="#">Innovation</a>
+                <a href="#">STEM Ecosystems</a>
+            </div>
+
+        </div>
+
+        <div>
+
+            <h3 style="margin-bottom:1rem;">
+                Contact
+            </h3>
+
+            <div class="footer-links">
+                <a href="#">info@tal.org</a>
+                <a href="#">Blantyre, Malawi</a>
+                <a href="#">+265 000 000 000</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        © 2026 Talent Accelerator Lab. All Rights Reserved.
+    </div>
+
+</footer>
+
+</body>
+</html>
